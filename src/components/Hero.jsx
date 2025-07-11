@@ -63,7 +63,7 @@ const Hero = () => {
               </Link>
               
               <Link
-                to="/signup"
+                to="/register"
                 className="px-6 py-3 border border-white text-white font-medium rounded-md hover:bg-white hover:bg-opacity-10 transition-colors flex items-center justify-center"
               >
                 Sign Up Free
