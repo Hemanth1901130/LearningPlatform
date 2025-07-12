@@ -16,8 +16,8 @@ const sampleUsers = [
       { courseId: 1, lessonId: 2 },
     ],
     lessonProgress: [
-      { courseId: 1, lessonId: 3, progress: 45 }, // 45% complete
-      { courseId: 3, lessonId: 1, progress: 20 }, // 20% complete
+      { courseId: 1, lessonId: 3, progress: 45 }, 
+      { courseId: 3, lessonId: 1, progress: 20 },
     ],
     bookmarkedLessons: [101, 302],
   },
