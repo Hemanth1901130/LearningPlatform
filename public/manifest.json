@@ -3,9 +3,10 @@
   "name": "LearnHub - Interactive Learning Platform",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "graduation-cap.svg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     },
     {
       "src": "logo192.png",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#5b46f8",
+  "background_color": "#5b46f8"
 }
