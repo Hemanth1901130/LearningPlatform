@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaStar, FaUsers, FaClock, FaChalkboardTeacher, FaRegPlayCircle, FaRegFileAlt, FaRegCheckCircle, FaLock, FaCertificate } from 'react-icons/fa';
 
-// Sample course data (in a real app, this would come from an API)
 const coursesData = [
   {
     id: 1,
@@ -83,7 +82,6 @@ const coursesData = [
       },
     ],
   },
-  // More courses would be here in a real app
 ];
 
 const CourseDetail = () => {
@@ -92,7 +90,6 @@ const CourseDetail = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedModules, setExpandedModules] = useState([0]); // First module expanded by default
   
-  // Find the course by id
   const course = coursesData.find((c) => c.id === parseInt(id)) || coursesData[0];
   
   const toggleModule = (index) => {
@@ -106,7 +103,6 @@ const CourseDetail = () => {
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Course Header */}
         <div className="bg-white rounded-xl overflow-hidden shadow-md mb-8">
           <div className="relative h-80">
             <img
@@ -153,9 +149,7 @@ const CourseDetail = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2">
-            {/* Tabs */}
             <div className="bg-white rounded-xl shadow-md mb-8">
               <div className="border-b border-gray-200">
                 <nav className="flex">
@@ -203,7 +197,6 @@ const CourseDetail = () => {
               </div>
               
               <div className="p-6">
-                {/* Overview Tab */}
                 {activeTab === 'overview' && (
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -236,7 +229,6 @@ const CourseDetail = () => {
                   </motion.div>
                 )}
                 
-                {/* Curriculum Tab */}
                 {activeTab === 'curriculum' && (
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -297,7 +289,6 @@ const CourseDetail = () => {
                           {expandedModules.includes(moduleIndex) && (
                             <div className="border-t border-gray-200">
                               {module.lessons.map((lesson, lessonIndex) => {
-                                // Create a unique lesson ID based on module and lesson index
                                 const lessonId = (moduleIndex + 1) * 100 + lessonIndex + 1;
                                 
                                 return (
@@ -308,7 +299,6 @@ const CourseDetail = () => {
                                       if (lesson.free) {
                                         navigate(`/courses/${id}/lessons/${lessonId}`);
                                       } else {
-                                        // Show a message or prompt to enroll
                                         alert('Please enroll in this course to access this lesson');
                                       }
                                     }}
@@ -343,7 +333,6 @@ const CourseDetail = () => {
                   </motion.div>
                 )}
                 
-                {/* Instructor Tab */}
                 {activeTab === 'instructor' && (
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -385,7 +374,6 @@ const CourseDetail = () => {
                   </motion.div>
                 )}
                 
-                {/* Reviews Tab */}
                 {activeTab === 'reviews' && (
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -445,7 +433,6 @@ const CourseDetail = () => {
                     </div>
                     
                     <div className="space-y-6">
-                      {/* Sample reviews - in a real app, these would come from an API */}
                       <div className="border-b border-gray-200 pb-6">
                         <div className="flex items-center mb-4">
                           <img
@@ -530,7 +517,6 @@ const CourseDetail = () => {
             </div>
           </div>
           
-          {/* Sidebar */}
           <div className="lg:col-span-1">
             <motion.div 
               className="bg-white rounded-xl shadow-md p-6 sticky top-24"

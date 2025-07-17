@@ -18,7 +18,6 @@ const Navbar = () => {
     setShowProfileMenu(!showProfileMenu);
   };
 
-  // Close profile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {
@@ -43,7 +42,6 @@ const Navbar = () => {
             </Link>
           </div>
           
-          {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-4">
             <Link to="/" className="px-3 py-2 rounded-md hover:bg-indigo-500 transition-colors">
               Home
@@ -145,7 +143,6 @@ const Navbar = () => {
             )}
           </div>
           
-          {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
             <button
               onClick={toggleMenu}
@@ -157,7 +154,6 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile menu */}
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}

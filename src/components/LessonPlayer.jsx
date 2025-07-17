@@ -11,7 +11,6 @@ const LessonPlayer = ({ lesson, onComplete, initialProgress = 0, onProgressUpdat
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
 
-  // Simulate video progress
   React.useEffect(() => {
     let interval;
     if (isPlaying && progress < 100) {
@@ -24,7 +23,6 @@ const LessonPlayer = ({ lesson, onComplete, initialProgress = 0, onProgressUpdat
             if (onComplete) onComplete();
             return 100;
           }
-          // Call the progress update callback if provided
           if (onProgressUpdate && newProgress % 5 === 0) { // Update every 5% to avoid too many updates
             onProgressUpdate(newProgress);
           }
@@ -59,13 +57,11 @@ const LessonPlayer = ({ lesson, onComplete, initialProgress = 0, onProgressUpdat
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
 
-  // Calculate current time based on progress
   const totalDuration = 1500; // 25 minutes in seconds
   const currentTime = (progress / 100) * totalDuration;
 
   return (
     <div className="bg-gray-900 rounded-lg overflow-hidden shadow-xl">
-      {/* Video display area */}
       <div className="relative aspect-video bg-black flex items-center justify-center">
         {!isPlaying && (
           <motion.div
@@ -83,21 +79,17 @@ const LessonPlayer = ({ lesson, onComplete, initialProgress = 0, onProgressUpdat
           </motion.div>
         )}
         
-        {/* Lesson title overlay */}
         <div className="absolute top-4 left-4 bg-black bg-opacity-50 px-3 py-1 rounded text-white">
           {lesson?.title || 'Introduction to Web Development'}
         </div>
         
-        {/* Video thumbnail or placeholder */}
         <img
           src={lesson?.thumbnail || 'https://images.unsplash.com/photo-1498050108023-c5249f4df085'}
           alt={lesson?.title || 'Lesson thumbnail'}
           className={`w-full h-full object-cover ${isPlaying ? 'opacity-0' : 'opacity-100'}`}
         />
         
-        {/* Video controls overlay */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-          {/* Progress bar */}
           <div className="relative h-1 bg-gray-600 rounded-full mb-4 cursor-pointer">
             <div
               className="absolute top-0 left-0 h-full bg-indigo-600 rounded-full"
@@ -107,12 +99,10 @@ const LessonPlayer = ({ lesson, onComplete, initialProgress = 0, onProgressUpdat
           
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              {/* Play/Pause button */}
               <button onClick={togglePlay} className="text-white hover:text-indigo-400 transition-colors">
                 {isPlaying ? <FaPause /> : <FaPlay />}
               </button>
               
-              {/* Volume control */}
               <div className="relative">
                 <button
                   onClick={toggleMute}
@@ -139,14 +129,12 @@ const LessonPlayer = ({ lesson, onComplete, initialProgress = 0, onProgressUpdat
                 )}
               </div>
               
-              {/* Time display */}
               <div className="text-white text-sm">
                 {formatTime(currentTime)} / {formatTime(totalDuration)}
               </div>
             </div>
             
             <div className="flex items-center space-x-4">
-              {/* Settings button */}
               <div className="relative">
                 <button
                   onClick={() => setShowSettings(!showSettings)}
@@ -177,7 +165,6 @@ const LessonPlayer = ({ lesson, onComplete, initialProgress = 0, onProgressUpdat
                 )}
               </div>
               
-              {/* Fullscreen button */}
               <button className="text-white hover:text-indigo-400 transition-colors">
                 <FaExpand />
               </button>
@@ -186,7 +173,6 @@ const LessonPlayer = ({ lesson, onComplete, initialProgress = 0, onProgressUpdat
         </div>
       </div>
       
-      {/* Lesson information */}
       <div className="p-4 bg-gray-800 text-white">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-bold">{lesson?.title || 'Introduction to Web Development'}</h3>

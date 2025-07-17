@@ -5,7 +5,6 @@ import { FaGraduationCap, FaBook, FaChartLine, FaBookmark, FaCertificate, FaCale
 import { useAuth } from '../context/AuthContext';
 import CourseCard from '../components/CourseCard';
 
-// Sample course data (in a real app, this would come from an API)
 const allCourses = [
   {
     id: 1,
@@ -45,7 +44,6 @@ const allCourses = [
   },
 ];
 
-// Sample lessons data
 const sampleLessons = [
   {
     id: 101,
@@ -65,35 +63,28 @@ const Dashboard = () => {
   const { currentUser } = useAuth();
   const [activeTab, setActiveTab] = useState('overview');
 
-  // If user is not logged in, redirect to login page
   if (!currentUser) {
     return <Navigate to="/login" />;
   }
 
-  // Get enrolled courses
   const enrolledCourses = allCourses.filter((course) =>
     currentUser.enrolledCourses?.includes(course.id)
   );
 
-  // Get bookmarked lessons
   const bookmarkedLessons = sampleLessons.filter((lesson) =>
     currentUser.bookmarkedLessons?.includes(lesson.id)
   );
 
-  // Calculate overall progress
   const calculateOverallProgress = () => {
     if (!currentUser.enrolledCourses || currentUser.enrolledCourses.length === 0) {
       return 0;
     }
 
-    // In a real app, this would be calculated based on completed lessons vs total lessons
     const completedLessonsCount = currentUser.completedLessons?.length || 0;
     const inProgressLessonsCount = currentUser.lessonProgress?.length || 0;
     
-    // Assuming each course has 10 lessons on average
     const totalLessonsEstimate = currentUser.enrolledCourses.length * 10;
     
-    // Count in-progress lessons as 50% complete
     const progressScore = completedLessonsCount + (inProgressLessonsCount * 0.5);
     
     return Math.min(Math.round((progressScore / totalLessonsEstimate) * 100), 100);
@@ -109,7 +100,6 @@ const Dashboard = () => {
           <p className="text-gray-600 mt-2">Track your progress and manage your learning journey</p>
         </div>
 
-        {/* Dashboard Tabs */}
         <div className="bg-white rounded-xl shadow-md mb-8">
           <div className="border-b border-gray-200">
             <nav className="flex">
@@ -157,7 +147,6 @@ const Dashboard = () => {
           </div>
 
           <div className="p-6">
-            {/* Overview Tab */}
             {activeTab === 'overview' && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -165,7 +154,6 @@ const Dashboard = () => {
                 transition={{ duration: 0.5 }}
               >
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                  {/* Progress Card */}
                   <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-lg p-6 text-white shadow-md">
                     <div className="flex items-center mb-4">
                       <FaChartLine className="text-2xl mr-3" />
@@ -183,7 +171,6 @@ const Dashboard = () => {
                     <p className="text-white text-opacity-80 mt-1">Keep up the good work!</p>
                   </div>
 
-                  {/* Courses Card */}
                   <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
                     <div className="flex items-center mb-4">
                       <FaBook className="text-2xl text-indigo-600 mr-3" />
@@ -201,7 +188,6 @@ const Dashboard = () => {
                     </Link>
                   </div>
 
-                  {/* Certificates Card */}
                   <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
                     <div className="flex items-center mb-4">
                       <FaCertificate className="text-2xl text-indigo-600 mr-3" />
@@ -215,7 +201,6 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                {/* Recent Activity */}
                 <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100 mb-8">
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Recent Activity</h3>
                   <div className="space-y-4">
@@ -241,7 +226,6 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                {/* Learning Schedule */}
                 <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-xl font-semibold text-gray-900">Learning Schedule</h3>
@@ -266,7 +250,6 @@ const Dashboard = () => {
               </motion.div>
             )}
 
-            {/* My Courses Tab */}
             {activeTab === 'courses' && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -299,7 +282,6 @@ const Dashboard = () => {
               </motion.div>
             )}
 
-            {/* Bookmarks Tab */}
             {activeTab === 'bookmarks' && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -341,7 +323,6 @@ const Dashboard = () => {
               </motion.div>
             )}
 
-            {/* Certificates Tab */}
             {activeTab === 'certificates' && (
               <motion.div
                 initial={{ opacity: 0 }}

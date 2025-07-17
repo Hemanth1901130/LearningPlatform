@@ -23,14 +23,12 @@ function App() {
           <Navbar />
           <main className="flex-grow">
             <Routes>
-              {/* Public routes */}
               <Route path="/" element={<Home />} />
               <Route path="/courses" element={<Courses />} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               
-              {/* Protected routes - require authentication */}
               <Route element={<ProtectedRoute />}>
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/dashboard" element={<Dashboard />} />
@@ -38,7 +36,6 @@ function App() {
                 <Route path="/courses/:courseId/lessons/:lessonId" element={<LessonPage />} />
               </Route>
               
-              {/* Catch-all route for 404 */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

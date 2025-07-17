@@ -5,7 +5,6 @@ import { FaArrowLeft, FaArrowRight, FaListUl, FaBookmark, FaRegBookmark } from '
 import LessonPlayer from '../components/LessonPlayer';
 import { useAuth } from '../context/AuthContext';
 
-// Sample lessons data (in a real app, this would come from an API)
 const sampleLessons = [
   {
     id: 1,
@@ -66,7 +65,6 @@ const LessonPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Check if user is enrolled in this course
     const checkEnrollment = () => {
       if (!currentUser) {
         setError('Please log in to access this lesson');
@@ -75,7 +73,6 @@ const LessonPage = () => {
       
       const enrolled = isEnrolled(parseInt(courseId));
       
-      // If the lesson is not free and user is not enrolled, show error
       if (!enrolled) {
         setError('Please enroll in this course to access this lesson');
         return false;
@@ -84,18 +81,15 @@ const LessonPage = () => {
       return true;
     };
     
-    // In a real app, this would be an API call
     const fetchLesson = () => {
       try {
         setLoading(true);
         
-        // Check enrollment first
         if (!checkEnrollment()) {
           setLoading(false);
           return;
         }
         
-        // Find the current lesson
         const currentLesson = sampleLessons.find(
           (l) => l.id === parseInt(lessonId) && l.courseId === parseInt(courseId)
         );
@@ -107,18 +101,15 @@ const LessonPage = () => {
         
         setLesson(currentLesson);
         
-        // Get all lessons for this course
         const lessonsForCourse = sampleLessons.filter(
           (l) => l.courseId === parseInt(courseId)
         );
         
         setCourseLessons(lessonsForCourse);
         
-        // Check if lesson is bookmarked
         const lessonBookmarked = isBookmarked(parseInt(lessonId));
         setBookmarked(lessonBookmarked);
         
-        // Get lesson progress
         const lessonProgress = getLessonProgress(parseInt(courseId), parseInt(lessonId));
         setProgress(lessonProgress);
       } catch (err) {
@@ -133,10 +124,8 @@ const LessonPage = () => {
   }, [courseId, lessonId, currentUser, isEnrolled, isBookmarked, getLessonProgress]);
 
   const handleLessonComplete = () => {
-    // Update the user's progress to 100% (completed)
     updateProgress(parseInt(courseId), parseInt(lessonId), 100);
     
-    // Navigate to the next lesson if available
     const currentIndex = courseLessons.findIndex((l) => l.id === parseInt(lessonId));
     if (currentIndex < courseLessons.length - 1) {
       const nextLesson = courseLessons[currentIndex + 1];
@@ -152,7 +141,6 @@ const LessonPage = () => {
   };
   
   const handleProgressUpdate = (newProgress) => {
-    // Update progress in the context
     updateProgress(parseInt(courseId), parseInt(lessonId), newProgress);
     setProgress(newProgress);
   };
@@ -185,7 +173,6 @@ const LessonPage = () => {
     );
   }
 
-  // Find current lesson index
   const currentIndex = courseLessons.findIndex((l) => l.id === parseInt(lessonId));
   const prevLesson = currentIndex > 0 ? courseLessons[currentIndex - 1] : null;
   const nextLesson = currentIndex < courseLessons.length - 1 ? courseLessons[currentIndex + 1] : null;
@@ -193,7 +180,6 @@ const LessonPage = () => {
   return (
     <div className="bg-gray-100 min-h-screen py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Course navigation */}
         <div className="flex justify-between items-center mb-6">
           <Link
             to={`/courses/${courseId}`}
@@ -220,7 +206,6 @@ const LessonPage = () => {
           </div>
         </div>
         
-        {/* Lesson player */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -234,7 +219,6 @@ const LessonPage = () => {
           />
         </motion.div>
         
-        {/* Lesson navigation */}
         <div className="mt-8 flex justify-between">
           {prevLesson ? (
             <button
@@ -264,7 +248,6 @@ const LessonPage = () => {
           )}
         </div>
         
-        {/* Lesson list sidebar */}
         {showLessonList && (
           <motion.div
             initial={{ opacity: 0, x: 300 }}
